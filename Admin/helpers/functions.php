@@ -7,9 +7,6 @@ function Clean($input)
 }
 
 
-
-
-
 function Validate($input, $flag, $length = 6)
 {
 
@@ -149,7 +146,6 @@ function doQuery($sql)
 
 function DBRemove($table, $id ,$col_id)
 {
-
     $sql = "delete from $table where $col_id = $id";
     $op  = mysqli_query($GLOBALS['con'], $sql);
 
@@ -169,7 +165,6 @@ function DBRemove($table, $id ,$col_id)
 
 function Upload($input)
 {
-
 
     # Upload Image ..... 
 
@@ -207,8 +202,5 @@ function Upload($input)
 # Url ... 
 
 function Url($input = null){
-      
-    
     return "http://".$_SERVER['HTTP_HOST']."/phpProject/App/Admin/".$input; 
-
 }

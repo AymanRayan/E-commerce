@@ -1,23 +1,30 @@
 <?php
 
+# Logic ...... 
 require '../helpers/DBConnection.php';
 require '../helpers/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+    // CODE ..... 
     $title = Clean($_POST['title']);
 
+
+    # VALIDATE INPUT ...... 
     $errors = [];
 
-    if (!Validate($title, 'required')) {   
+    if (!Validate($title, 'required')) {
         $errors['Title'] = "Field Required";
     }
 
+
+    # Checke errors 
     if (count($errors) > 0) {
         $_SESSION['Message'] = $errors;
     } else {
-        
-        $sql = "insert into roles (title) values ('$title')";
+        // code ..... 
+
+        $sql = "insert into categories (title) values ('$title')";
         $op  = doQuery($sql);
 
 
@@ -30,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['Message'] = $message;
     }
 }
-
 
 
 require '../layouts/header.php';
@@ -51,7 +57,7 @@ require '../layouts/sidNav.php';
 
             <?php
 
-            PrintMessages('Dashboard / Roles / Create');
+            PrintMessages('Dashboard / Categories / Create');
 
             ?>
 
@@ -66,7 +72,7 @@ require '../layouts/sidNav.php';
 
             <div class="form-group">
                 <label for="exampleInputName">Title</label>
-                <input type="text" class="form-control" id="exampleInputName" aria-describedby="" name="title" placeholder="Enter Role Title">
+                <input type="text" class="form-control" id="exampleInputName" aria-describedby="" name="title" placeholder="Enter Category Title">
             </div>
 
             <button type="submit" class="btn btn-primary">SAVE</button>

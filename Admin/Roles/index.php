@@ -1,11 +1,8 @@
 <?php
 
-# Logic ...... 
-
 require '../helpers/DBConnection.php';
 require '../helpers/functions.php';
 
-# Fetch Data .... 
 $sql = "select * from roles";
 $op  = doQuery($sql);
 
@@ -65,7 +62,6 @@ require '../layouts/sidNav.php';
 
                             <?php
 
-                            # Fetch And Print data .... 
 
                             while ($data = mysqli_fetch_assoc($op)) {
 

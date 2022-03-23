@@ -1,31 +1,45 @@
 <?php
 
+# Logic ...... 
 
 require '../helpers/DBConnection.php';
 require '../helpers/functions.php';
 
+# Fetch Raw Data ..... 
+
 $id = $_GET['id'];
-$sql = "select * from roles where role_id = $id";
+$sql = "select * from categories where category_id = $id";
 $op  = doQuery($sql);
 $data = mysqli_fetch_assoc($op);
 
 
 
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+    // CODE ..... 
     $title = Clean($_POST['title']);
 
+
+    # VALIDATE INPUT ...... 
     $errors = [];
 
-    if (!Validate($title, 'required')) {   
+    if (!Validate($title, 'required')) {
+        Validate($title, 'required') == false;
         $errors['Title'] = "Field Required";
     }
 
+
+    # Checke errors 
     if (count($errors) > 0) {
         $_SESSION['Message'] = $errors;
     } else {
-        
-        $sql = "update roles set title = '$title' where role_id = $id";
+        // code ..... 
+
+        $sql = "update categories set title = '$title' where category_id = $id";
         $op  =  doQuery($sql);
 
 
@@ -42,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 
-
 require '../layouts/header.php';
 
 require '../layouts/nav.php';
@@ -57,23 +70,38 @@ require '../layouts/sidNav.php';
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
+
+
             <?php
-            PrintMessages('Dashboard / Roles / Edit');
+
+            PrintMessages('Dashboard / Categories / Edit');
+
             ?>
+
+
         </ol>
 
-        <form action="edit.php?id=<?php echo $data['role_id']; ?>" method="post" enctype="multipart/form-data">
+
+
+        <form action="edit.php?id=<?php echo $data['category_id']; ?>" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="exampleInputName">Title</label>
-                <input type="text" class="form-control" id="exampleInputName" aria-describedby="" name="title" value="<?php echo $data['title']; ?>" placeholder="Enter Role Title">
+                <input type="text" class="form-control" id="exampleInputName" aria-describedby="" name="title" value="<?php echo $data['title']; ?>" placeholder="Enter Category Title">
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
 
+
+
+
     </div>
 </main>
+
+
+
+
 
 <?php
 

@@ -19,7 +19,7 @@
                             
                               $modules = ["Roles","Users","Categories","Productes"];
                               }else{
-                                $modules = ["Articales"];
+                                $modules = ["Productes"];
                               }
 
                               foreach ($modules as $key => $value) {

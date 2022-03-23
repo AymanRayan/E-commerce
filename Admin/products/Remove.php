@@ -5,8 +5,21 @@
 
   $id = $_GET['id']; 
 
-  $status = DBRemove('roles',$id,'role_id'); 
+# select image Name .... 
+$sql = "select image from articales where id = $id"; 
+ $op  = doQuery($sql);
+ $data = mysqli_fetch_assoc($op); 
+
+
+
+  # Call DBRemove Method 
+  $status = DBRemove('articales',$id); 
+
+
   if($status){
+
+    unlink('uploads/'.$data['image']);
+    
       $message = ["Message" => "Raw Removed"]; 
   }else{
     $message = ["Message" => "Error Try Again"]; 

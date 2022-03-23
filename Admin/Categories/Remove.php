@@ -5,7 +5,10 @@
 
   $id = $_GET['id']; 
 
-  $status = DBRemove('roles',$id,'role_id'); 
+  # Call DBRemove Method 
+  $status = DBRemove('categories',$id,'category_id'); 
+
+
   if($status){
       $message = ["Message" => "Raw Removed"]; 
   }else{

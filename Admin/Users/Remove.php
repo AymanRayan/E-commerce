@@ -7,14 +7,10 @@ require '../helpers/checkAdmin.php';
 
 $id = $_GET['id'];
 
-# select image Name .... 
 $sql = "select image from users where user_id = $id";
 $op  = doQuery($sql);
 $data = mysqli_fetch_assoc($op);
 
-
-
-# Call DBRemove Method 
 $status = DBRemove('users', $id, 'user_id');
 
 

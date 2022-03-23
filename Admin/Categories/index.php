@@ -1,12 +1,14 @@
 <?php
 
+# Logic ...... 
+
 require '../helpers/DBConnection.php';
 require '../helpers/functions.php';
-require '../helpers/checkLogin.php';
-require '../helpers/checkAdmin.php';
 
-$sql = "select users.* , userroles.title from users  inner join userroles on users.role_id = userroles.id";
+# Fetch Data .... 
+$sql = "select * from categories";
 $op  = doQuery($sql);
+
 
 
 
@@ -25,10 +27,10 @@ require '../layouts/sidNav.php';
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-
+          
             <?php
 
-            PrintMessages('Dashboard/Roles');
+            PrintMessages('Dashboard/Categories');
 
             ?>
         </ol>
@@ -41,7 +43,7 @@ require '../layouts/sidNav.php';
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                List User System Roles
+                List Categories
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -49,23 +51,15 @@ require '../layouts/sidNav.php';
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>EMAIL</th>
-                                <th>PHONE</th>
-                                <th>TYPE</th>
-                                <th>IMAGE</th>
-                                <th>CONTROL</th>
+                                <th>Title</th>
+                                <th>Control</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>EMAIL</th>
-                                <th>PHONE</th>
-                                <th>TYPE</th>
-                                <th>IMAGE</th>
-                                <th>CONTROL</th>
+                                <th>Title</th>
+                                <th>Control</th>
                             </tr>
                         </tfoot>
 
@@ -74,20 +68,18 @@ require '../layouts/sidNav.php';
 
                             <?php
 
+                            # Fetch And Print data .... 
+
                             while ($data = mysqli_fetch_assoc($op)) {
 
                             ?>
                                 <tr>
-                                    <td><?php echo $data['user_id']; ?></td>
-                                    <td><?php echo $data['name']; ?></td>
-                                    <td><?php echo $data['email']; ?></td>
-                                    <td><?php echo $data['phone']; ?></td>
+                                    <td><?php echo $data['category_id']; ?></td>
                                     <td><?php echo $data['title']; ?></td>
-                                    <td> <img src="./uploads/<?php echo $data['image']; ?>" width="80px" height="80px"> </td>
                                     <td>
-                                        <a href='Remove.php?id=<?php echo $data['user_id']; ?>' class='btn btn-danger m-r-1em'>Delete</a>
+                                        <a href='Remove.php?id=<?php echo $data['category_id']; ?>' class='btn btn-danger m-r-1em'>Delete</a>
 
-                                        <a href='edit.php?id=<?php echo $data['user_id']; ?>' class='btn btn-primary m-r-1em'>Edit</a>
+                                        <a href='edit.php?id=<?php echo $data['category_id']; ?>' class='btn btn-primary m-r-1em'>Edit</a>
                                     </td>
 
 
